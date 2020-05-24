@@ -2,7 +2,11 @@
 using System.Collections;
 using System;
 
-public class LevelController : MonoBehaviour {
+public class LevelController : MonoBehaviour 
+{    
+    [SerializeField]
+    private ScreenController screenController = null;
+
     public GameObject[] notePrefabs = new GameObject[5]; // [0 - 4] = [White --> Red] 
     public GameObject hitbar;
 
@@ -15,6 +19,11 @@ public class LevelController : MonoBehaviour {
 
     private void AddNote()
     {
+        if (!this.isActiveAndEnabled)
+        {
+            return;
+        }
+
         var position = random.Next(1, 10);
         var prefabPosition = position <= 5 ? position - 1 : 9 - position;
         var note = Instantiate(notePrefabs[prefabPosition]);
@@ -25,6 +34,11 @@ public class LevelController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {               
+    void Update () 
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            screenController.ShowScreen(GameScreen.SongMenu);
+        }
     }
 }
