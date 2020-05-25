@@ -389,6 +389,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &927596296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8517429021724091691, guid: 635c6e9611119ce4db1a45ced2ad33aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8517429021341566070}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &927596297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6640621211582229583, guid: 635c6e9611119ce4db1a45ced2ad33aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8517429021341566070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927596296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360bb0d133ca61641bbc605a5ac72ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1030801559 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 221943304862056730, guid: 518ca2d0b0e4132469af3896e6f54134,
@@ -434,8 +452,7 @@ MonoBehaviour:
   songMenuScreen: {fileID: 1030801559}
   gameplayScreen: {fileID: 190247590}
   resultsScreen: {fileID: 2111756651}
-  configureControllerScreen: {fileID: 8517429021724091691, guid: 635c6e9611119ce4db1a45ced2ad33aa,
-    type: 3}
+  configureControllerScreen: {fileID: 927596296}
 --- !u!4 &1230971044
 Transform:
   m_ObjectHideFlags: 0
@@ -841,8 +858,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6640621211582229583, guid: 635c6e9611119ce4db1a45ced2ad33aa,
-        type: 3}
+      objectReference: {fileID: 927596297}
     - target: {fileID: 2799600628103859103, guid: 635c6e9611119ce4db1a45ced2ad33aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
