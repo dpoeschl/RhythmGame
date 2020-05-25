@@ -4,6 +4,9 @@ using System;
 
 public class NoteController : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource audioSource;
+
     public int position; // 1-9
     private KeyCode keycode;
     private bool hit = false;
@@ -79,6 +82,38 @@ public class NoteController : MonoBehaviour
                 Vector3 offScreenPosition = new Vector3(transform.position.x, transform.position.y - 100f, 0.0f);
                 GetComponent<Rigidbody2D>().MovePosition(offScreenPosition);
                 hit = true;
+
+                switch (position)
+                {
+                    case 1:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.C6);
+                        break;
+                    case 2:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.D6);
+                        break;
+                    case 3:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.E6);
+                        break;
+                    case 4:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.F6);
+                        break;
+                    case 5:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.G6);
+                        break;
+                    case 6:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.A6);
+                        break;
+                    case 7:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.B6);
+                        break;
+                    case 8:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.C7);
+                        break;
+                    case 9:
+                        ScaleNotes.Instance.AudioSource.PlayOneShot(ScaleNotes.Instance.D7);
+                        break;
+                }
+
                 return;
             }
             else

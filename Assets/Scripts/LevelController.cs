@@ -14,17 +14,34 @@ public class LevelController : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("AddNote", 3, 0.2f);
+        InvokeRepeating("AddChord", 3, 0.2f);
     }
 
-    private void AddNote()
+    private void AddChord()
     {
         if (!this.isActiveAndEnabled)
         {
             return;
         }
 
-        var position = random.Next(1, 10);
+        var position1 = random.Next(1, 10);
+        var position2 = random.Next(1,10);
+        while (true)
+        {
+            if (position2 != position1)
+            {
+                break;
+            }
+
+            position2 = random.Next(1,10);
+        }
+
+        AddNote(position1);
+        AddNote(position2);
+    }
+
+    void AddNote(int position)
+    {
         var prefabPosition = position <= 5 ? position - 1 : 9 - position;
         var note = Instantiate(notePrefabs[prefabPosition]);
         note.transform.parent = this.transform;
