@@ -143,8 +143,7 @@ public class NoteController : MonoBehaviour
                     print("MISS(" + position + ")");
                 }
 
-                Vector3 nextPosition = new Vector3(transform.position.x, transform.position.y - 2000f, 0.0f);
-                GetComponent<Rigidbody2D>().MovePosition(nextPosition);
+                Destroy(this.gameObject);
             }
             else
             {
