@@ -14,7 +14,7 @@ public class LevelController : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("AddChord", 3, 0.2f);
+        InvokeRepeating("AddChord", 3, 0.7f);
     }
 
     private void AddChord()
@@ -36,8 +36,21 @@ public class LevelController : MonoBehaviour
             position2 = random.Next(1,10);
         }
 
+        var position3 = random.Next(1,10);
+        while (true)
+        {
+            if (position3 != position1 && position3 != position2)
+            {
+                break;
+            }
+
+            position3 = random.Next(1,10);
+        }
+
+
         AddNote(position1);
         AddNote(position2);
+        AddNote(position3);
     }
 
     void AddNote(int position)
