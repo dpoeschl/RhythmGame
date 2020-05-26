@@ -15,15 +15,15 @@ public class NoteController : MonoBehaviour
     private static KeyCode[] keyCodes = 
         {
             default(KeyCode),
-            KeyCode.A,
-            KeyCode.W,
-            KeyCode.S,
-            KeyCode.E,
-            KeyCode.D,
-            KeyCode.R,
-            KeyCode.F,
-            KeyCode.T,
-            KeyCode.G,
+            KeyCode.JoystickButton0,
+            KeyCode.JoystickButton1,
+            KeyCode.JoystickButton5,
+            KeyCode.JoystickButton2,
+            KeyCode.JoystickButton4,
+            KeyCode.JoystickButton3,
+            KeyCode.JoystickButton7,
+            KeyCode.Joystick8Button19, // HACK
+            KeyCode.JoystickButton6,
         };
 
     internal void SetPosition(int v)
@@ -56,10 +56,24 @@ public class NoteController : MonoBehaviour
     {
     }
 	
+    bool RYPreviouslyDown = false;
+
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(keycode))
+        bool shouldRun;
+        if (keycode == KeyCode.Joystick8Button19)
+        {
+            bool pressed = Input.GetAxis("Vertical") == 1;
+            shouldRun = !RYPreviouslyDown && pressed;
+            RYPreviouslyDown = pressed;
+        }
+        else
+        {
+            shouldRun = Input.GetKeyDown(keycode);
+        }
+
+        if (shouldRun)
         {
             var targetY = GameObject.Find("hitbar").transform.position.y;
             var myY = transform.position.y;
