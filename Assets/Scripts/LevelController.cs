@@ -14,7 +14,7 @@ public class LevelController : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("AddChord", 3, 0.7f);
+        InvokeRepeating("AddChord", 3, 0.2f);
     }
 
     private void AddChord()
@@ -49,8 +49,8 @@ public class LevelController : MonoBehaviour
 
 
         AddNote(position1);
-        AddNote(position2);
-        AddNote(position3);
+        //AddNote(position2);
+        //AddNote(position3);
     }
 
     void AddNote(int position)
