@@ -14,37 +14,6 @@ public class Gameplay2Controller : MonoBehaviour
         public int Time { get; set; }
     }
 
-    (int, int)[] song = new (int, int)[]
-    {
-        (0, 0),
-        (500, 1),
-        (1000, 2),
-        (1500, 3),
-        (2000, 4),
-        (2500, 5),
-        (3000, 6),
-        (3500, 7),
-        (4000, 8),
-        (4250, 7),
-        (4500, 6),
-        (4750, 5),
-        (5000, 4),
-        (5250, 3),
-        (5500, 2),
-        (5750, 1),
-        (6000, 0),
-        (7000, 0),
-        (7000, 2),
-        (8000, 1),
-        (8000, 3),
-        (9000, 2),
-        (9000, 4),
-        (10000, 1),
-        (10000, 3),
-        (11000, 0),
-        (11000, 2),
-    };
-
     List<Note> notes = new List<Note>();
 
     [SerializeField]
@@ -90,6 +59,7 @@ public class Gameplay2Controller : MonoBehaviour
 
     double greatScore;
     double goodScore;
+    private (int, int)[] song;
 
     void Start()
     {
@@ -112,6 +82,11 @@ public class Gameplay2Controller : MonoBehaviour
         goodScore = greatScore / 2;
 
         stopwatch = Stopwatch.StartNew();
+    }
+
+    internal void SetSong(int songIndex)
+    {
+        song = SongData.GetSongData(songIndex);
     }
 
     void Update()

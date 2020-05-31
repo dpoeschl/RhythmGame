@@ -7,20 +7,13 @@ public class SongMenuController : MonoBehaviour
     [SerializeField]
     private ScreenController screenController = null;
 
-    public void OnButtonClicked()
+    public void OnButton0Clicked()
     {
-        screenController.ShowScreen(GameScreen.Gameplay);
+        screenController.ShowGameScreen(0);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnButton1Clicked()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        screenController.ShowGameScreen(1);
     }
 }

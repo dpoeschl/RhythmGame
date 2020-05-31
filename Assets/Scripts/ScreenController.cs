@@ -32,8 +32,20 @@ public class ScreenController : MonoBehaviour
     {
         mainMenuScreen.SetActive(screen == GameScreen.MainMenu);
         songMenuScreen.SetActive(screen == GameScreen.SongMenu);
-        gameplayScreen.SetActive(screen == GameScreen.Gameplay);
         resultsScreen.SetActive(screen == GameScreen.Results);
         configureControllerScreen.SetActive(screen == GameScreen.ConfigureController);
+        gameplayScreen.SetActive(false);
+    }
+
+    public void ShowGameScreen(int songIndex)
+    {
+        mainMenuScreen.SetActive(false);
+        songMenuScreen.SetActive(false);
+        resultsScreen.SetActive(false);
+        configureControllerScreen.SetActive(false);
+        gameplayScreen.SetActive(true);
+
+        var gameplayController = gameplayScreen.GetComponent<Gameplay2Controller>();
+        gameplayController.SetSong(songIndex);
     }
 }
