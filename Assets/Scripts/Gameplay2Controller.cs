@@ -7,6 +7,13 @@ using System.Collections.Generic;
 
 public class Gameplay2Controller : MonoBehaviour
 {
+    private class Note
+    {
+        public GameObject GameObject { get; set; }
+        public int Button { get; set; }
+        public int Time { get; set; }
+    }
+
     (int, int)[] song = new (int, int)[]
     {
         (0, 0),
@@ -38,7 +45,7 @@ public class Gameplay2Controller : MonoBehaviour
         (11000, 2),
     };
 
-    List<(GameObject, int)> notes = new List<(GameObject, int)>();
+    List<Note> notes = new List<Note>();
 
     [SerializeField]
     private GameObject leftWhite = null;
@@ -101,6 +108,8 @@ public class Gameplay2Controller : MonoBehaviour
 
     private void ProcessButtons()
     {
+        var millis = stopwatch.ElapsedMilliseconds;
+
         for (int i = 0; i < 9; i++)
         {
             var (keyCode, column, clip) = keyCodes[i];
@@ -116,17 +125,32 @@ public class Gameplay2Controller : MonoBehaviour
             }
 
             var columnController = column.GetComponent<ColumnController>();
-            if (pressed)
-            {
-                columnController.Hit();
-            }
-            else
+            if (!pressed)
             {
                 columnController.Default();
             }
 
             if (pressed && !previouslyHit[i])
             {
+                bool hitANote = false;
+
+                foreach (var note in notes)
+                {
+                    if (Math.Abs(millis - note.Time) < 100)
+                    {
+                        hitANote = true;
+                    }
+                }
+
+                if (hitANote)
+                {
+                    columnController.Hit();
+                }
+                else
+                {
+                    columnController.Miss();
+                }
+
                 ScaleNotes.Instance.AudioSource.PlayOneShot(clip);
             }
 
@@ -180,28 +204,22 @@ public class Gameplay2Controller : MonoBehaviour
                     break;
             }
 
-            switch (column)
-            {
-                default:
-                    GameObject panel = new GameObject("Panel");
-                    panel.AddComponent<CanvasRenderer>();
+            GameObject panel = new GameObject("Panel");
+            panel.AddComponent<CanvasRenderer>();
 
-                    RectTransform rectTransform = panel.AddComponent<RectTransform>();
-                    rectTransform.anchorMin = new Vector2(0, 0.09f + time/2000f);
-                    rectTransform.anchorMax = new Vector2(1, 0.11f + time/2000f);
+            RectTransform rectTransform = panel.AddComponent<RectTransform>();
+            rectTransform.anchorMin = new Vector2(0, 0.09f + time/2000f);
+            rectTransform.anchorMax = new Vector2(1, 0.11f + time/2000f);
 
-                    rectTransform.offsetMin = Vector2.zero;
-                    rectTransform.offsetMax = Vector2.zero;
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
 
-                    Image i = panel.AddComponent<Image>();
-                    i.color = color;
+            Image i = panel.AddComponent<Image>();
+            i.color = color;
 
-                    panel.transform.SetParent(parent.transform, false);
+            panel.transform.SetParent(parent.transform, false);
 
-                    notes.Add((panel, time));
-
-                    break;
-            }
+            notes.Add(new Note { GameObject = panel, Button = column, Time = time });
         }
     }
 
@@ -209,11 +227,16 @@ public class Gameplay2Controller : MonoBehaviour
     {
         var millis = stopwatch.ElapsedMilliseconds;
 
-        foreach (var (gameObject, time) in notes)
+        foreach (var note in notes)
         {
-            RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-            rectTransform.anchorMin = new Vector2(0,0.09f + (time - millis) / 2000f);
-            rectTransform.anchorMax = new Vector2(1,0.11f + (time - millis) / 2000f);
+            if (millis > (note.Time + 100))
+            {
+                note.Time = -1000000;
+            }
+
+            RectTransform rectTransform = note.GameObject.GetComponent<RectTransform>();
+            rectTransform.anchorMax = new Vector2(1,0.11f + (note.Time - millis) / 2000f);
+            rectTransform.anchorMin = new Vector2(0,0.09f + (note.Time - millis) / 2000f);
         }
     }
 }
