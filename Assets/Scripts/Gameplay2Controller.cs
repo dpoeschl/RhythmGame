@@ -16,6 +16,9 @@ public class Gameplay2Controller : MonoBehaviour
     List<Note> notes = new List<Note>();
 
     [SerializeField]
+    private AudioClip maryHadFunClip = null;
+
+    [SerializeField]
     private ScreenController screenController = null;
 
     [SerializeField]
@@ -92,6 +95,12 @@ public class Gameplay2Controller : MonoBehaviour
         exited = false;
         started = true;
         stopwatch = Stopwatch.StartNew();
+
+        if (songIndex == 2 || songIndex == 3)
+        {
+            ScaleNotes.Instance.AudioSource.clip = maryHadFunClip;
+            ScaleNotes.Instance.AudioSource.Play();
+        }
     }
 
     void Update()
@@ -200,6 +209,7 @@ public class Gameplay2Controller : MonoBehaviour
     {
         exited = true;
         stopwatch.Stop();
+        ScaleNotes.Instance.AudioSource.Stop();
         noteStreak = 0;
         score = 0;
         screenController.ShowScreen(GameScreen.SongMenu);

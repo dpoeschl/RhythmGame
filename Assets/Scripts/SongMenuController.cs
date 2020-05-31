@@ -16,4 +16,14 @@ public class SongMenuController : MonoBehaviour
     {
         screenController.ShowGameScreen(1);
     }
+
+    public void OnButton2Clicked()
+    {
+        screenController.ShowGameScreen(2);
+    }
+
+    public void OnButton3Clicked()
+    {
+        screenController.ShowGameScreen(3);
+    }
 }
