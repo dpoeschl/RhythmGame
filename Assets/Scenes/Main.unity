@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781fd775295778b48bb5eb7b7f2bbbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenController: {fileID: 1230971043}
   leftWhite: {fileID: 750469336}
   leftYellow: {fileID: 1144238644}
   leftGreen: {fileID: 1183374742}
@@ -1120,6 +1121,11 @@ PrefabInstance:
       propertyPath: screenController
       value: 
       objectReference: {fileID: 1230971043}
+    - target: {fileID: 6640621211582229583, guid: 635c6e9611119ce4db1a45ced2ad33aa,
+        type: 3}
+      propertyPath: currentInputsText
+      value: 
+      objectReference: {fileID: 8517429021341566071}
     - target: {fileID: 7562685423572215156, guid: 635c6e9611119ce4db1a45ced2ad33aa,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1212,6 +1218,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 635c6e9611119ce4db1a45ced2ad33aa, type: 3}
+--- !u!114 &8517429021341566071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7930390802363523158, guid: 635c6e9611119ce4db1a45ced2ad33aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8517429021341566070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9109581547544990764
 PrefabInstance:
   m_ObjectHideFlags: 0
