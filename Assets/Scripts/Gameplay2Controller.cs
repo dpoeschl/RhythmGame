@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using UnityEngine.UI;
 using System.Diagnostics;
@@ -15,6 +14,9 @@ public class Gameplay2Controller : MonoBehaviour
     }
 
     List<Note> notes = new List<Note>();
+
+    [SerializeField]
+    private ScreenController screenController = null;
 
     [SerializeField]
     private GameObject leftWhite = null;
@@ -75,28 +77,35 @@ public class Gameplay2Controller : MonoBehaviour
             (KeyCode.Joystick8Button19, rightYellow, ScaleNotes.Instance.C7), // HACK
             (KeyCode.JoystickButton6, rightWhite, ScaleNotes.Instance.D7)
         };
-
-        CreateAllNotes();
-
-        greatScore = 100000d / song.Length;
-        goodScore = greatScore / 2;
-
-        stopwatch = Stopwatch.StartNew();
     }
 
     internal void SetSong(int songIndex)
     {
         song = SongData.GetSongData(songIndex);
+        CreateAllNotes();
+
+        greatScore = 100000d / song.Length;
+        goodScore = greatScore / 2;
+
+        exited = false;
+        started = true;
+        stopwatch = Stopwatch.StartNew();
     }
 
     void Update()
     {
-        MoveNotes();
+        if (started && !exited)
+        {
+            MoveNotes();
 
-        ProcessButtons();
+            ProcessButtons();
 
-        UpdateText();
+            UpdateText();
+        }
     }
+
+    private bool started = false;
+    private bool exited = false;
 
     private void UpdateText()
     {
@@ -106,6 +115,11 @@ public class Gameplay2Controller : MonoBehaviour
 
     private void ProcessButtons()
     {
+        if (Input.GetKey(KeyCode.JoystickButton9))
+        {
+            ExitSong();
+        }
+
         var millis = stopwatch.ElapsedMilliseconds;
 
         for (int i = 0; i < 9; i++)
@@ -169,6 +183,15 @@ public class Gameplay2Controller : MonoBehaviour
 
             previouslyHit[i] = pressed;
         }
+    }
+
+    private void ExitSong()
+    {
+        exited = true;
+        stopwatch.Stop();
+        noteStreak = 0;
+        score = 0;
+        screenController.ShowScreen(GameScreen.SongMenu);
     }
 
     private void CreateAllNotes()
