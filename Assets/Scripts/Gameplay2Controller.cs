@@ -162,7 +162,7 @@ public class Gameplay2Controller : MonoBehaviour
 
                 foreach (var note in notes)
                 {
-                    if(Math.Abs(millis - note.Time) < 150)
+                    if(i == note.Button && Math.Abs(millis - note.Time) < 150)
                     {
                         hitANote = true;
                         great = Math.Abs(millis - note.Time) < 100;
