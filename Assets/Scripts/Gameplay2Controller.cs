@@ -126,7 +126,7 @@ public class Gameplay2Controller : MonoBehaviour
 
     private void ProcessButtons()
     {
-        if (Input.GetKey(KeyCode.JoystickButton9))
+        if (Input.GetKey(KeyCode.JoystickButton9) && Input.GetKey(KeyCode.JoystickButton8))
         {
             ExitSong();
         }
@@ -135,6 +135,15 @@ public class Gameplay2Controller : MonoBehaviour
         {
             scrollSpeed += 1f;
             if (scrollSpeed > 10)
+            {
+                scrollSpeed = 10;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.JoystickButton9))
+        {
+            scrollSpeed -= 1f;
+            if (scrollSpeed < 1)
             {
                 scrollSpeed = 1;
             }
