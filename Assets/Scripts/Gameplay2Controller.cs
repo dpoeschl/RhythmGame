@@ -92,8 +92,6 @@ public class Gameplay2Controller : MonoBehaviour
         exited = false;
         started = true;
         stopwatch = Stopwatch.StartNew();
-
-        scrollSpeed = 1.0f;
     }
 
     void Update()
