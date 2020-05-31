@@ -20,11 +20,16 @@ public class ColumnController : MonoBehaviour
 
     public void Miss()
     {
-        GetComponent<Image>().color = new Color(0, 0, 1);
+        GetComponent<Image>().color = new Color(0,0,1);
     }
 
-    public void Hit()
+    public void HitGreat()
     {
-        GetComponent<Image>().color = new Color(1, 1, 0);
+        GetComponent<Image>().color = new Color(1,1,0);
+    }
+
+    public void HitGood()
+    {
+        GetComponent<Image>().color = new Color(1,0,0);
     }
 }

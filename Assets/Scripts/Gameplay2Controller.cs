@@ -133,18 +133,30 @@ public class Gameplay2Controller : MonoBehaviour
             if (pressed && !previouslyHit[i])
             {
                 bool hitANote = false;
+                bool great = false;
+
 
                 foreach (var note in notes)
                 {
-                    if (Math.Abs(millis - note.Time) < 100)
+                    if(Math.Abs(millis - note.Time) < 100)
                     {
                         hitANote = true;
+                        great = Math.Abs(millis - note.Time) < 50;
+                        note.Time = -1000000;
+                        break;
                     }
                 }
 
                 if (hitANote)
                 {
-                    columnController.Hit();
+                    if (great)
+                    {
+                        columnController.HitGreat();
+                    }
+                    else
+                    {
+                        columnController.HitGood();
+                    }
                 }
                 else
                 {
