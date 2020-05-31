@@ -77,12 +77,19 @@ public class Gameplay2Controller : MonoBehaviour
     [SerializeField]
     private Text noteStreakText = null;
 
+    [SerializeField]
+    private Text scoreText = null;
+
     private (KeyCode, GameObject, AudioClip)[] keyCodes;
     private bool[] previouslyHit = new bool[9];
 
     Stopwatch stopwatch;
 
     int noteStreak = 0;
+    double score = 0;
+
+    double greatScore;
+    double goodScore;
 
     void Start()
     {
@@ -101,6 +108,9 @@ public class Gameplay2Controller : MonoBehaviour
 
         CreateAllNotes();
 
+        greatScore = 100000d / song.Length;
+        goodScore = greatScore / 2;
+
         stopwatch = Stopwatch.StartNew();
     }
 
@@ -116,6 +126,7 @@ public class Gameplay2Controller : MonoBehaviour
     private void UpdateText()
     {
         noteStreakText.text = noteStreak.ToString();
+        scoreText.text = Math.Round(score).ToString();
     }
 
     private void ProcessButtons()
@@ -147,7 +158,6 @@ public class Gameplay2Controller : MonoBehaviour
                 bool hitANote = false;
                 bool great = false;
 
-
                 foreach (var note in notes)
                 {
                     if(Math.Abs(millis - note.Time) < 100)
@@ -165,10 +175,12 @@ public class Gameplay2Controller : MonoBehaviour
 
                     if (great)
                     {
+                        score += greatScore;
                         columnController.HitGreat();
                     }
                     else
                     {
+                        score += goodScore;
                         columnController.HitGood();
                     }
                 }
