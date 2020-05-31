@@ -74,10 +74,15 @@ public class Gameplay2Controller : MonoBehaviour
     [SerializeField]
     private GameObject rightWhite = null;
 
+    [SerializeField]
+    private Text noteStreakText = null;
+
     private (KeyCode, GameObject, AudioClip)[] keyCodes;
     private bool[] previouslyHit = new bool[9];
 
     Stopwatch stopwatch;
+
+    int noteStreak = 0;
 
     void Start()
     {
@@ -104,6 +109,13 @@ public class Gameplay2Controller : MonoBehaviour
         MoveNotes();
 
         ProcessButtons();
+
+        UpdateText();
+    }
+
+    private void UpdateText()
+    {
+        noteStreakText.text = noteStreak.ToString();
     }
 
     private void ProcessButtons()
@@ -149,6 +161,8 @@ public class Gameplay2Controller : MonoBehaviour
 
                 if (hitANote)
                 {
+                    noteStreak++;
+
                     if (great)
                     {
                         columnController.HitGreat();
@@ -241,9 +255,10 @@ public class Gameplay2Controller : MonoBehaviour
 
         foreach (var note in notes)
         {
-            if (millis > (note.Time + 100))
+            if (note.Time != -1000000 &&  millis > (note.Time + 100))
             {
                 note.Time = -1000000;
+                noteStreak = 0;
             }
 
             RectTransform rectTransform = note.GameObject.GetComponent<RectTransform>();

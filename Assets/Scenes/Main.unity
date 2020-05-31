@@ -434,6 +434,7 @@ MonoBehaviour:
   rightGreen: {fileID: 649056889}
   rightYellow: {fileID: 733731339}
   rightWhite: {fileID: 1858542080}
+  noteStreakText: {fileID: 2244727656575640507}
 --- !u!1 &927596296 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8517429021724091691, guid: 635c6e9611119ce4db1a45ced2ad33aa,
@@ -918,6 +919,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c97eabfc7564da64aa64676c6ea36493, type: 3}
+--- !u!114 &2244727656575640507 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3716370704780802323, guid: c97eabfc7564da64aa64676c6ea36493,
+    type: 3}
+  m_PrefabInstance: {fileID: 2244727656575640506}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8144666797616614854
 PrefabInstance:
   m_ObjectHideFlags: 0
