@@ -79,6 +79,8 @@ public class Gameplay2Controller : MonoBehaviour
         };
     }
 
+    float scrollSpeed = 1.0f;
+
     internal void SetSong(int songIndex)
     {
         song = SongData.GetSongData(songIndex);
@@ -90,6 +92,8 @@ public class Gameplay2Controller : MonoBehaviour
         exited = false;
         started = true;
         stopwatch = Stopwatch.StartNew();
+
+        scrollSpeed = 1.0f;
     }
 
     void Update()
@@ -118,6 +122,15 @@ public class Gameplay2Controller : MonoBehaviour
         if (Input.GetKey(KeyCode.JoystickButton9))
         {
             ExitSong();
+        }
+
+        if (Input.GetKeyDown(KeyCode.JoystickButton8))
+        {
+            scrollSpeed += 1f;
+            if (scrollSpeed > 10)
+            {
+                scrollSpeed = 1;
+            }
         }
 
         var millis = stopwatch.ElapsedMilliseconds;
@@ -272,8 +285,8 @@ public class Gameplay2Controller : MonoBehaviour
             }
 
             RectTransform rectTransform = note.GameObject.GetComponent<RectTransform>();
-            rectTransform.anchorMax = new Vector2(1,0.11f + (note.Time - millis) / 2000f);
-            rectTransform.anchorMin = new Vector2(0,0.09f + (note.Time - millis) / 2000f);
+            rectTransform.anchorMax = new Vector2(1,0.11f + ((note.Time - millis) / 4000f) * scrollSpeed);
+            rectTransform.anchorMin = new Vector2(0,0.09f + ((note.Time - millis) / 4000f) * scrollSpeed);
         }
     }
 }
