@@ -160,10 +160,10 @@ public class Gameplay2Controller : MonoBehaviour
 
                 foreach (var note in notes)
                 {
-                    if(Math.Abs(millis - note.Time) < 100)
+                    if(Math.Abs(millis - note.Time) < 150)
                     {
                         hitANote = true;
-                        great = Math.Abs(millis - note.Time) < 50;
+                        great = Math.Abs(millis - note.Time) < 100;
                         note.Time = -1000000;
                         break;
                     }
@@ -267,7 +267,7 @@ public class Gameplay2Controller : MonoBehaviour
 
         foreach (var note in notes)
         {
-            if (note.Time != -1000000 &&  millis > (note.Time + 100))
+            if (note.Time != -1000000 &&  millis > (note.Time + 151))
             {
                 note.Time = -1000000;
                 noteStreak = 0;
