@@ -270,23 +270,39 @@ public class Gameplay2Controller : MonoBehaviour
                     break;
             }
 
-            GameObject panel = new GameObject("Panel");
-            panel.AddComponent<CanvasRenderer>();
 
-            RectTransform rectTransform = panel.AddComponent<RectTransform>();
-            rectTransform.anchorMin = new Vector2(0, 0.09f + time/2000f);
-            rectTransform.anchorMax = new Vector2(1, 0.11f + time/2000f);
+            var notePanel = CreateNotePanel(color);
+            notePanel.transform.SetParent(parent.transform, false);
 
-            rectTransform.offsetMin = Vector2.zero;
-            rectTransform.offsetMax = Vector2.zero;
-
-            Image i = panel.AddComponent<Image>();
-            i.color = color;
-
-            panel.transform.SetParent(parent.transform, false);
-
-            notes.Add(new Note { GameObject = panel, Button = column, Time = time });
+            notes.Add(new Note { GameObject = notePanel, Button = column, Time = time });
         }
+    }
+
+    private GameObject CreateNotePanel(Color color)
+    {
+        GameObject notePanel = new GameObject("Panel");
+        notePanel.AddComponent<CanvasRenderer>();
+        RectTransform notePanelRectTransform = notePanel.AddComponent<RectTransform>();
+        notePanelRectTransform.offsetMin = Vector2.zero;
+        notePanelRectTransform.offsetMax = Vector2.zero;
+
+        Image noteImage = notePanel.AddComponent<Image>();
+        noteImage.color = color;
+
+        GameObject centerPanel = new GameObject("Panel");
+        centerPanel.AddComponent<CanvasRenderer>();
+        RectTransform centerPanelRectTransform = centerPanel.AddComponent<RectTransform>();
+        centerPanelRectTransform.offsetMin = Vector2.zero;
+        centerPanelRectTransform.offsetMax = Vector2.zero;
+        centerPanelRectTransform.anchorMin = new Vector2(0, 1/3f);
+        centerPanelRectTransform.anchorMax = new Vector2(1, 2/3f);
+
+        Image centerImage = centerPanel.AddComponent<Image>();
+        centerImage.color = Color.white;
+
+        centerPanel.transform.SetParent(notePanel.transform, false);
+
+        return notePanel;
     }
 
     private void MoveNotes()
@@ -302,8 +318,8 @@ public class Gameplay2Controller : MonoBehaviour
             }
 
             RectTransform rectTransform = note.GameObject.GetComponent<RectTransform>();
-            rectTransform.anchorMax = new Vector2(1,0.11f + ((note.Time - millis) / 4000f) * scrollSpeed);
-            rectTransform.anchorMin = new Vector2(0,0.09f + ((note.Time - millis) / 4000f) * scrollSpeed);
+            rectTransform.anchorMax = new Vector2(1,0.13f + ((note.Time - millis) / 4000f) * scrollSpeed);
+            rectTransform.anchorMin = new Vector2(0,0.07f + ((note.Time - millis) / 4000f) * scrollSpeed);
         }
     }
 }
