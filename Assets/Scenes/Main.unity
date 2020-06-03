@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781fd775295778b48bb5eb7b7f2bbbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maryHadFunClip: {fileID: 8300000, guid: 884778e5febd7ee479896307398fa3f0, type: 3}
+  maryHadFunClip: {fileID: 8300000, guid: 959bf419b76770047ad4d462f603cce0, type: 3}
   screenController: {fileID: 1230971043}
   leftWhite: {fileID: 750469336}
   leftYellow: {fileID: 1144238644}
