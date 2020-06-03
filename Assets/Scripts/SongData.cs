@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SongData : MonoBehaviour
+public class SongData
 {
     public static (int, int)[] GetSongData(int songChoice)
     {
